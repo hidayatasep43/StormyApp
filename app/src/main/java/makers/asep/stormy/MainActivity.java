@@ -7,7 +7,10 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,15 +42,30 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.summaryValue) TextView mSummaryValue;
     @BindView(R.id.iconImageView) ImageView mIconImageView;
     @BindView(R.id.locationTextView) TextView mLocationValue;
+    @BindView(R.id.refreshButton) ImageButton mRefreshButton;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //use butterKnife
         ButterKnife.bind(this);
+        mRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getForecast();
+            }
+        });
+        getForecast();
 
+        //Main thread
+        Log.d(TAG,"Ini Main activity...");
+
+    }
+
+    private void getForecast() {
         //add url to code
         String apiKey = "1de32f701f3be8533550c0bc903b7c40";
         double latitude = -6.896674;
@@ -56,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 "/" + latitude + "," + longitude;
 
         if(isNetworkAvailable()) {
+            toggleShow();
             //deklarasi okhttp client
             OkHttpClient client = new OkHttpClient();
             //build request that the client will send to the server
@@ -71,10 +90,24 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     //jika gagal
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            toggleShow();
+                        }
+                    });
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+                    //show progress bar
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            toggleShow();
+                        }
+                    });
+
                     //jika berhasil
                     //get data
                     String jsonData = response.body().string();
@@ -103,9 +136,16 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Network is Unvailable",
                     Toast.LENGTH_LONG).show();
         }
-        //Main thread
-        Log.d(TAG,"Ini Main activity...");
+    }
 
+    private void toggleShow() {
+        if(mProgressBar.getVisibility() == View.VISIBLE){
+            mRefreshButton.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }else{
+            mRefreshButton.setVisibility(View.INVISIBLE);
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
 
     }
 
