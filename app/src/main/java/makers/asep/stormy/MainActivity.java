@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -14,6 +16,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -27,10 +31,21 @@ public class MainActivity extends AppCompatActivity {
     //weather
     private CurrentWeather mCurrentWeather;
 
+
+    @BindView(R.id.timeTextView) TextView mTimeLabel;
+    @BindView(R.id.tempetureTextView) TextView mTemperatureLabel;
+    @BindView(R.id.valueHumidityLabel) TextView mHumidityValue;
+    @BindView(R.id.precipChanceValue) TextView mPrecipValue;
+    @BindView(R.id.summaryValue) TextView mSummaryLabel;
+    @BindView(R.id.iconImageView) ImageView mIconImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //use butterKnife
+        ButterKnife.bind(this);
 
         //add url to code
         String apiKey = "1de32f701f3be8533550c0bc903b7c40";
