@@ -1,6 +1,7 @@
 package makers.asep.stormy;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -115,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
         mSummaryValue.setText(mCurrentWeather.getSummary() + "");
         mLocationValue.setText(mCurrentWeather.getTimezone());
+
+        //set image
+        Drawable drawable = getResources().getDrawable(mCurrentWeather.getIconId());
+        mIconImageView.setImageDrawable(drawable);
     }
 
     private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {

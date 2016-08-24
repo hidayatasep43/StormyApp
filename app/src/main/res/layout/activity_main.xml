@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100"
+        android:text="--"
         android:id="@+id/tempetureTextView"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -35,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="at 8:00 pm it will be"
+        android:text="..."
         android:id="@+id/timeTextView"
         android:layout_above="@+id/tempetureTextView"
         android:layout_centerHorizontal="true"
@@ -45,7 +45,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Asian/Jakarta"
+        android:text="--"
         android:id="@+id/locationTextView"
         android:layout_above="@+id/timeTextView"
         android:layout_centerHorizontal="true"
@@ -89,7 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.88"
+                android:text="--"
                 android:id="@+id/valueHumidityLabel"
                 android:singleLine="true"
                 android:textColor="#ffffff"
@@ -114,7 +114,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100%"
+                android:text="--"
                 android:id="@+id/precipChanceValue"
                 android:textSize="24sp"
                 android:textColor="#ffffff"/>
@@ -124,7 +124,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hujan dengan ES"
         android:id="@+id/summaryValue"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
@@ -132,7 +131,8 @@
         android:textSize="20sp"
         android:textIsSelectable="true"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:text="Getting Current Weather ..."/>
 
 
 </RelativeLayout>
