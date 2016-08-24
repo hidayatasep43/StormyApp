@@ -1,7 +1,6 @@
 package makers.asep.stormy;
 
 import android.content.Context;
-import android.database.CursorIndexOutOfBoundsException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -33,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     @BindView(R.id.timeTextView) TextView mTimeLabel;
-    @BindView(R.id.tempetureTextView) TextView mTemperatureLabel;
+    @BindView(R.id.tempetureTextView) TextView mTemperatureValue;
     @BindView(R.id.valueHumidityLabel) TextView mHumidityValue;
     @BindView(R.id.precipChanceValue) TextView mPrecipValue;
-    @BindView(R.id.summaryValue) TextView mSummaryLabel;
+    @BindView(R.id.summaryValue) TextView mSummaryValue;
     @BindView(R.id.iconImageView) ImageView mIconImageView;
+    @BindView(R.id.locationTextView) TextView mLocationValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                         Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
                             mCurrentWeather = getCurrentDetails(jsonData);
+                            //updata UI
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    updateUIDisplay();
+                                }
+                            });
+
                         } else {
                             alertUserAboutError();
                         }
@@ -98,6 +106,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,"Ini Main activity...");
 
 
+    }
+
+    private void updateUIDisplay() {
+        mTemperatureValue.setText(mCurrentWeather.getTemperature() + " ");
+        mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + "it will be");
+        mHumidityValue.setText(mCurrentWeather.getHumadity() + "");
+        mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
+        mSummaryValue.setText(mCurrentWeather.getSummary() + "");
+        mLocationValue.setText(mCurrentWeather.getTimezone());
     }
 
     private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
