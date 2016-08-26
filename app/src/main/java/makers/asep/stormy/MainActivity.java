@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     //weather
-    private ForeCast mForeCast;
+    private ForeCast mForecast;
 
 
     @BindView(R.id.timeTextView) TextView mTimeLabel;
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
-                            mForeCast = parseForecastDetails(jsonData);
+                            mForecast = parseForecastDetails(jsonData);
                             //updata UI
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUIDisplay() {
 
-        CurrentWeather mCurrentWeather = mForeCast.getCurrentWeather();
+        CurrentWeather mCurrentWeather = mForecast.getCurrentWeather();
 
         mTemperatureValue.setText(mCurrentWeather.getTemperature() + " ");
         mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + "it will be");
@@ -182,9 +182,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private Day[] getDailyForecast(String jsonData) {
+    private Day[] getDailyForecast(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        //get timezone
+        String timezone = forecast.getString("timezone");
 
-        return null;
+        //get data daily
+        JSONObject daily = forecast.getJSONObject("daily");
+        JSONArray data = daily.getJSONArray("data");
+
+        Day[] days = new Day[data.length()];
+        for(int i = 0; i<data.length();i++){
+            //get data daily
+            JSONObject jsonDay = data.getJSONObject(i);
+            Day day = new Day();
+
+            //get data daily
+            day.setSummary(jsonDay.getString("summary"));
+            day.setTime(jsonDay.getLong("time"));
+            day.setTemperatureMax(jsonDay.getDouble("temperatureMax"));
+            day.setIcon(jsonDay.getString("icon"));
+            day.setTimezone(timezone);
+
+            //get data
+            days[i] = day;
+        }
+
+        return days;
     }
 
     //method untuk mendapatkan data weather hourly
@@ -196,7 +220,26 @@ public class MainActivity extends AppCompatActivity {
         JSONObject hourly = forecast.getJSONObject("hourly");
         JSONArray data = hourly.getJSONArray("data");
 
-        return null;
+        Log.e(TAG,data.length() + "");
+        Hour[] Hours = new Hour[data.length()]; //membuat array hour sebanyak jummlah adta pada JSON array data
+        for(int i=0;i<data.length();i++){
+            //get data hourly from array bersdasarkan index
+            JSONObject jsonHour = data.getJSONObject(i);
+            Hour hour = new Hour();
+
+            //get data
+            hour.setSummary(jsonHour.getString("summary"));
+            hour.setTime(jsonHour.getLong("time"));
+            hour.setIcon(jsonHour.getString("icon"));
+            hour.setTemperature(jsonHour.getDouble("temperature"));
+            hour.setTimeZone(timezone);
+
+            Log.e(TAG,i + "");
+            Hours[i] = hour;
+        }
+
+        //return hours
+        return Hours;
 
     }
 
