@@ -1,6 +1,7 @@
 package makers.asep.stormy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,7 +23,9 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import makers.asep.stormy.ui.AlertDialgFragment;
+import makers.asep.stormy.ui.DailyForecastActivity;
 import makers.asep.stormy.weather.CurrentWeather;
 import makers.asep.stormy.weather.Day;
 import makers.asep.stormy.weather.ForeCast;
@@ -287,5 +290,13 @@ public class MainActivity extends AppCompatActivity {
         //memunculkan alertdialog
         AlertDialgFragment dialog = new AlertDialgFragment();
         dialog.show(getFragmentManager(),"error dialog");
+    }
+
+    //aksi button daily
+    //use bknife
+    @OnClick (R.id.dailyButton)
+    public void startDailyActivity(View view){
+        Intent intent = new Intent(this, DailyForecastActivity.class);
+        startActivity(intent);
     }
 }
