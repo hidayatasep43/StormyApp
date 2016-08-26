@@ -21,6 +21,9 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import makers.asep.stormy.ui.AlertDialgFragment;
+import makers.asep.stormy.weather.CurrentWeather;
+import makers.asep.stormy.weather.ForeCast;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     //weather
-    private CurrentWeather mCurrentWeather;
+    private ForeCast mForeCast;
 
 
     @BindView(R.id.timeTextView) TextView mTimeLabel;
@@ -114,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Log.v(TAG, jsonData);
                         if (response.isSuccessful()) {
-                            mCurrentWeather = getCurrentDetails(jsonData);
+                            mForeCast = parseForecastDetails(jsonData);
                             //updata UI
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -150,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUIDisplay() {
+
+        CurrentWeather mCurrentWeather = mForeCast.getCurrentWeather();
+
         mTemperatureValue.setText(mCurrentWeather.getTemperature() + " ");
         mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + "it will be");
         mHumidityValue.setText(mCurrentWeather.getHumadity() + "");
@@ -160,6 +166,14 @@ public class MainActivity extends AppCompatActivity {
         //set image
         Drawable drawable = getResources().getDrawable(mCurrentWeather.getIconId());
         mIconImageView.setImageDrawable(drawable);
+    }
+
+    private ForeCast parseForecastDetails(String jsonData) throws JSONException {
+        //masukan data ke forecast
+        ForeCast foreCast = new ForeCast();
+        foreCast.setCurrentWeather(getCurrentDetails(jsonData));
+
+        return foreCast;
     }
 
     private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {

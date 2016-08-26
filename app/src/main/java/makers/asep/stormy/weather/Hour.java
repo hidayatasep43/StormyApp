@@ -1,4 +1,4 @@
-package makers.asep.stormy;
+package makers.asep.stormy.weather;
 
 /**
  * Created by hidayatasep43 on 26-Aug-16.

@@ -1,8 +1,10 @@
-package makers.asep.stormy;
+package makers.asep.stormy.weather;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import makers.asep.stormy.R;
 
 /**
  * Created by hidayatasep43 on 23-Aug-16.

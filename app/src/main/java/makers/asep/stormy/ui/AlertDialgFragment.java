@@ -1,10 +1,12 @@
-package makers.asep.stormy;
+package makers.asep.stormy.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+
+import makers.asep.stormy.R;
 
 /**
  * Created by hidayatasep43 on 23-Aug-16.
