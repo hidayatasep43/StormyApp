@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
 import makers.asep.stormy.R;
+import makers.asep.stormy.adapter.DayAdapter;
+import makers.asep.stormy.weather.Day;
 
 public class DailyForecastActivity extends ListActivity {
+
+    private Day[] mDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +20,8 @@ public class DailyForecastActivity extends ListActivity {
 
         String[] daysOfTheWeek = { "Sunday", "Monday", "Tuesday",
                 "Wednesday", "Thursday", "Friday", "Saturday" };
+
         //array adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_expandable_list_item_1,
-                daysOfTheWeek
-                );
-        setListAdapter(adapter);
+        DayAdapter adapter = new DayAdapter(this,mDays);
     }
 }
