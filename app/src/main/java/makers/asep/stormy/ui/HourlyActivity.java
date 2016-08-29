@@ -35,7 +35,7 @@ public class HourlyActivity extends AppCompatActivity {
         mHours = Arrays.copyOf(parcelables,parcelables.length,Hour[].class);
 
         //memanggil adapter
-        HourAdapter adapter = new HourAdapter(mHours);
+        HourAdapter adapter = new HourAdapter(mHours,this);
         mRecyclerView.setAdapter(adapter);
 
         //menggunakan layout manager

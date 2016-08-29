@@ -41,6 +41,9 @@ public class DailyForecastActivity extends ListActivity {
 
         DayAdapter adapter = new DayAdapter(this,mDays);
         setListAdapter(adapter);
+
+        //jika tidak ada
+        //setEmptyView(nama textview)
     }
 
 
