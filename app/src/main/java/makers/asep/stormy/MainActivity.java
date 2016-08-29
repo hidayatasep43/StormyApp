@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import makers.asep.stormy.ui.AlertDialgFragment;
 import makers.asep.stormy.ui.DailyForecastActivity;
+import makers.asep.stormy.ui.HourlyActivity;
 import makers.asep.stormy.weather.CurrentWeather;
 import makers.asep.stormy.weather.Day;
 import makers.asep.stormy.weather.ForeCast;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String DAILY_FORECAST = "dailyforecast";
+    public static final String HOURLY_FORECAST = "hourlyforecast";
 
     //weather
     private ForeCast mForecast;
@@ -299,6 +301,14 @@ public class MainActivity extends AppCompatActivity {
     public void startDailyActivity(View view){
         Intent intent = new Intent(this, DailyForecastActivity.class);
         intent.putExtra(DAILY_FORECAST,mForecast.getDays());
+        startActivity(intent);
+    }
+
+    //aksi button hourly
+    @OnClick (R.id.hourlyButton)
+    public void startHourlyActivity(View view){
+        Intent intent = new Intent(this, HourlyActivity.class);
+        intent.putExtra(HOURLY_FORECAST,mForecast.getHours());
         startActivity(intent);
     }
 }
