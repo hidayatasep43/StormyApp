@@ -70,7 +70,7 @@ public class Day implements Parcelable{
     //getDay
     public String getDayOfTheWeek(){
         //format untuk hari
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd - MM");
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
         formatter.setTimeZone(TimeZone.getTimeZone(mTimezone));
         Date dateTime = new Date(mTime * 1000);
         //return day
