@@ -52,7 +52,7 @@ public class Hour implements Parcelable {
     }
 
     public int getTemperature() {
-        return (int)Math.round(mTemperature);
+        return (int)Math.round((((mTemperature-32) * 5)/9));
     }
 
     public int getIconId(){
