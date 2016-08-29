@@ -16,6 +16,7 @@ public class HourlyActivity extends AppCompatActivity {
 
     private Hour[] mHours;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
