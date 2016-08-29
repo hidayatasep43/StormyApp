@@ -17,6 +17,10 @@ public class Day implements Parcelable{
     private String mIcon;
     private String mTimezone;
 
+    public Day(){
+
+    }
+
     public long getTime() {
         return mTime;
     }
@@ -66,7 +70,7 @@ public class Day implements Parcelable{
     //getDay
     public String getDayOfTheWeek(){
         //format untuk hari
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd - MM");
         formatter.setTimeZone(TimeZone.getTimeZone(mTimezone));
         Date dateTime = new Date(mTime * 1000);
         //return day
@@ -114,5 +118,5 @@ public class Day implements Parcelable{
         public Day[] newArray(int size) {
             return new Day[size];
         }
-    }
+    };
 }

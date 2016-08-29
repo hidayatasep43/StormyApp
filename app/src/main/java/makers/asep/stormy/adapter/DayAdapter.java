@@ -49,14 +49,11 @@ public class DayAdapter extends BaseAdapter {
             //jika belum ada view untuk ditampilkan
             //create new view
             convertView = LayoutInflater.from(mContext).inflate(R.layout.daily_list_item,null);
-
             viewHolder = new ViewHolder();
-            viewHolder.iconImageView = (ImageView)convertView.findViewById(R.id.iconImageView);
+            viewHolder.iconImageView = (ImageView)convertView.findViewById(R.id.weatherImageView);
             viewHolder.temperatureLabel = (TextView)convertView.findViewById(R.id.temperatureLabel);
-            viewHolder.dayLabel = (TextView)convertView.findViewById(R.id.temperatureLabel);
-
+            viewHolder.dayLabel = (TextView)convertView.findViewById(R.id.dayLabel);
             convertView.setTag(viewHolder);
-
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
@@ -68,8 +65,7 @@ public class DayAdapter extends BaseAdapter {
         viewHolder.temperatureLabel.setText(day.getTemperatureMax() + "");
         viewHolder.dayLabel.setText(day.getDayOfTheWeek());
 
-
-        return null;
+        return convertView;
     }
 
     //class for reuse view
