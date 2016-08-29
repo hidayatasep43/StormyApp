@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="makers.asep.stormy.ui.HourlyActivity"
-    tools:background="@drawable/bg_gradient"
+    android:background="@drawable/bg_gradient"
     >
 
     <android.support.v7.widget.RecyclerView

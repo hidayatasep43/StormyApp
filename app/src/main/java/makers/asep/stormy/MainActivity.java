@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         CurrentWeather mCurrentWeather = mForecast.getCurrentWeather();
 
         mTemperatureValue.setText(mCurrentWeather.getTemperature() + " ");
-        mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + "it will be");
+        mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + " it will be");
         mHumidityValue.setText(mCurrentWeather.getHumadity() + "");
         mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
         mSummaryValue.setText(mCurrentWeather.getSummary() + "");

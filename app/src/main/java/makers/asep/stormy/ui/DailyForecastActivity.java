@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -17,6 +21,7 @@ import makers.asep.stormy.weather.Day;
 
 public class DailyForecastActivity extends ListActivity {
 
+    private static final String TAG = DailyForecastActivity.class.getSimpleName();
     private Day[] mDays;
 
     @Override
@@ -36,5 +41,25 @@ public class DailyForecastActivity extends ListActivity {
 
         DayAdapter adapter = new DayAdapter(this,mDays);
         setListAdapter(adapter);
+    }
+
+
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Log.d(TAG,"klik");
+
+        String dayOfTheWeek = mDays[position].getDayOfTheWeek();
+        String condition = mDays[position].getSummary();
+        String highTemperature = mDays[position].getTemperatureMax() + "";
+
+        String message = String.format("On %s the high will be %s and it will be %s",
+                dayOfTheWeek,
+                highTemperature,
+                condition
+                );
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+
     }
 }

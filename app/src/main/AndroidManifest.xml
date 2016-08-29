@@ -24,7 +24,9 @@
             android:name=".ui.DailyForecastActivity"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".ui.HourlyActivity">
+        <activity
+            android:name=".ui.HourlyActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 
