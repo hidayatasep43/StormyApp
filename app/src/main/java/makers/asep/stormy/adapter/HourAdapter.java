@@ -34,7 +34,7 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.HourViewHolder
     @Override
     public void onBindViewHolder(HourViewHolder holder, int position) {
         //merupakan penghubung dengan adapter
-
+        holder.bindHour(mHours[position]);
     }
 
     //return jumlah adata
